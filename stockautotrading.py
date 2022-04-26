@@ -1,8 +1,12 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 from sklearn import metrics
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+import matplotlib.pyplot as plt
+
 
 # preprocessing : 股價的漲 (1) or 跌 (0) label
 def add_label(df, column):
@@ -79,13 +83,6 @@ if __name__ == '__main__':
 
     print("finish")
     ######################################################################
-
-    import keras
-    from keras.models import Sequential
-    from keras.layers import Dense
-    from keras.layers import LSTM
-    from keras.layers import Dropout,BatchNormalization
-
     keras.backend.clear_session()
     regressor = Sequential()
     regressor.add(LSTM(units = 50, input_shape = (train_x.shape[1], 1)))
@@ -96,8 +93,6 @@ if __name__ == '__main__':
     print("finish")
 
     ######################################################################
-
-    import matplotlib.pyplot as plt
    
     # loss graph
     plt.title('train_loss')
@@ -150,8 +145,10 @@ if __name__ == '__main__':
         if ans1[i]==1 and ans1[i+1]==0:
             stock_number=-1
         output.append(stock_number)
-        
-    while len(output)<19:
+    
+    print('test_set: '+ str(len(test_set)))
+
+    while len(output)<(len(test_set)-1):
         output.append(stock_number)
         
     print(output)
