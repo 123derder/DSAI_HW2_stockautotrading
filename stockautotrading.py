@@ -136,20 +136,28 @@ if __name__ == '__main__':
     print(str(round(metrics.accuracy_score(ans1, ans2) * 100, 2)) + " %" )
  
     ######################################################################
-    ### 輸出 output.csv  策略: 當0轉1的時候，1那個點就要買  當1轉0的時候，0那個點就要賣 (買時股票數量-> 1 賣時股票數量-> -1)
+    ### 輸出 output.csv  策略: 當0轉1的時候，1那個點就要買  當1轉0的時候，0那個點就要賣 (買時股票數量-> 1 賣時股票數量-> -0)
     output=[]
     stock_number=0
     for i in range(len(ans1)-1):
-        if ans1[i]==0 and ans1[i+1]==1:
-            stock_number=1
-        if ans1[i]==1 and ans1[i+1]==0:
-            stock_number=-1
-        output.append(stock_number)
+        if i==0:
+            if ans1[i]==0:
+                output.append(0)
+            else:
+                output.append(1)
+        else:
+            if ans1[i]==1 and ans1[i-1]==0:
+                output.append(1)
+            else: 
+                if ans1[i]==0 and ans1[i-1]==1:
+                    output.append(-1)
+                else:
+                    output.append(0)
     
     print('test_set: '+ str(len(test_set)))
 
     while len(output)<(len(test_set)-1):
-        output.append(stock_number)
+        output.append(0)
         
     print(output)
 
