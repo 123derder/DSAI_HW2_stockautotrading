@@ -128,12 +128,12 @@ if __name__ == '__main__':
     ######################################################################
 
     ans1 = label_convert(predicted_stock_price)  # 預測的list(5天後)  1:預測5天後會漲 0:預測5天後會跌 
-    print("ans1: "+ str(ans1))
-    ans2 = label_convert(test["open"])
-    print("ans2: "+ str(ans2))
+    #print("ans1: "+ str(ans1))
+    #ans2 = label_convert(test["open"])
+    #print("ans2: "+ str(ans2))
 
-    print("accuracy :", end=" ")
-    print(str(round(metrics.accuracy_score(ans1, ans2) * 100, 2)) + " %" )
+    #print("accuracy :", end=" ")
+    #print(str(round(metrics.accuracy_score(ans1, ans2) * 100, 2)) + " %" )
  
     ######################################################################
     ### 輸出 output.csv  策略: 當0轉1的時候，1那個點就要買  當1轉0的時候，0那個點就要賣 (買時股票數量-> 1 賣時股票數量-> -0)
